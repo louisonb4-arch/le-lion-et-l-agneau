@@ -877,8 +877,98 @@ em { font-style: italic; }
 
 @media (max-width: 640px) {
   body { font-size: 1.12rem; }
-  .galerie { columns: 1; }
   .visite-infos { grid-template-columns: 1fr; }
   .pied-social { margin-left: 0; }
   .couv-mention { position: static; margin-top: 3rem; }
+}
+
+/* ============ MOBILE « ÉDITION DE POCHE » ============
+   Le livre se feuillette : chiffres romains en filigrane,
+   fleurons de fin de chapitre, planches qui débordent des
+   marges, galerie en frise à faire glisser.               */
+
+.glisser { display: none; }
+
+@media (max-width: 860px) {
+
+  /* chiffre romain géant en filigrane derrière chaque titre */
+  .chapitre-tete {
+    position: relative;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+    padding-top: 1.2rem;
+  }
+  .chapitre-tete::before {
+    font-family: var(--fell);
+    font-size: 8.5rem;
+    line-height: 0.8;
+    position: absolute;
+    right: -0.4rem;
+    top: -1.6rem;
+    color: var(--grenat);
+    opacity: 0.13;
+    pointer-events: none;
+  }
+  #fable .chapitre-tete::before { content: 'I'; }
+  #rotisseur .chapitre-tete::before { content: 'II'; }
+  #assiettes .chapitre-tete::before { content: 'III'; }
+  #table .chapitre-tete::before { content: 'IV'; }
+  #visite .chapitre-tete::before { content: 'V'; }
+  .chapitre-sombre .chapitre-tete::before { color: var(--grenat-clair); opacity: 0.3; }
+  .chapitre-bleu .chapitre-tete::before { color: #d8b98a; opacity: 0.22; }
+
+  /* fleuron aldin en cul-de-lampe */
+  .chapitre::after {
+    content: '❦';
+    display: block;
+    text-align: center;
+    font-size: 1.7rem;
+    color: var(--grenat);
+    opacity: 0.75;
+    margin-top: 3rem;
+  }
+  .chapitre-sombre::after { color: var(--grenat-clair); }
+  .chapitre-bleu::after { color: #d8b98a; }
+
+  /* planches qui débordent des marges, en alternance */
+  .planche-hero { margin-right: -1.9rem; transform: rotate(1.8deg); }
+  .fable-planches .planche:first-child { margin-left: -1.9rem; transform: rotate(-2.2deg); max-width: none; width: 86vw; }
+  .fable-planches .planche:last-child  { margin-right: -1.9rem; margin-left: auto; transform: rotate(2deg); max-width: none; width: 78vw; }
+  .planche-portrait { margin-left: -1.9rem; transform: rotate(-1.8deg); }
+  .planche-hote { margin-right: -1.9rem; margin-left: auto; transform: rotate(2deg); }
+  .table-planches .planche:first-child { margin-left: -1.9rem; transform: rotate(-1.6deg); }
+  .planche-facade { margin-right: -1.9rem; transform: rotate(1.6deg); }
+  .planche figcaption { padding-left: 1.9rem; }
+  .planche-hero figcaption, .planche-hote figcaption, .planche-facade figcaption,
+  .fable-planches .planche:last-child figcaption { padding-left: 0; padding-right: 1.9rem; text-align: right; }
+
+  /* galerie : frise horizontale, planches à feuilleter */
+  .glisser { display: block; margin-bottom: 1.6rem; transform: rotate(-2deg); }
+  .galerie {
+    columns: auto;
+    width: auto;
+    max-width: none;
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin: 0 -1.4rem;
+    padding: 0.6rem 1.4rem 1.4rem;
+    scrollbar-width: none;
+  }
+  .galerie::-webkit-scrollbar { display: none; }
+  .galerie .planche {
+    flex: 0 0 74vw;
+    scroll-snap-align: center;
+    margin-bottom: 0;
+  }
+  .galerie .planche:nth-child(3n+1),
+  .galerie .planche:nth-child(3n+2) { transform: none; }
+  .galerie .planche:nth-child(even) { transform: rotate(1.1deg); }
+  .galerie .planche:nth-child(odd)  { transform: rotate(-1.1deg); }
+  .galerie .cadre img {
+    height: 82vw;
+    object-fit: cover;
+  }
 }
