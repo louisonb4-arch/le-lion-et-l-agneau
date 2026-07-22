@@ -28,7 +28,11 @@ html.qa *, html.qa *::before, html.qa *::after {
 html.qa { scroll-behavior: auto; }
 html.qa .couverture { min-height: auto; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden; /* repli pour navigateurs sans support de clip */
+  overflow-x: clip;   /* fige la page : plus de dérive latérale gauche/droite sur mobile */
+}
 
 body {
   background: var(--papier);
@@ -37,6 +41,7 @@ body {
   font-size: 1.19rem;
   line-height: 1.65;
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* grain papier */
