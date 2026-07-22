@@ -28,15 +28,22 @@ html.qa *, html.qa *::before, html.qa *::after {
 html.qa { scroll-behavior: auto; }
 html.qa .couverture { min-height: auto; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+}
 
 body {
+  position: relative;
   background: var(--papier);
   color: var(--encre);
   font-family: var(--garamond);
   font-size: 1.19rem;
   line-height: 1.65;
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 /* grain papier */
