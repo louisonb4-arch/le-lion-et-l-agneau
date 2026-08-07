@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lelionetlagneau-site.vercel.app/sitemap.xml
